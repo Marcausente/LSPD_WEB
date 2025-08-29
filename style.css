@@ -3664,6 +3664,10 @@ body {
     overflow: hidden;
     transition: all 0.3s ease;
     border: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
 }
 
 .constitution-iframe-container:hover {
@@ -3673,6 +3677,7 @@ body {
 
 .constitution-iframe {
     width: 100%;
+    max-width: 1000px;
     height: 700px;
     border: none;
     display: block;
@@ -3695,6 +3700,7 @@ body {
     
     .constitution-iframe {
         height: 500px;
+        max-width: 100%;
     }
 }
 
@@ -3709,6 +3715,7 @@ body {
     
     .constitution-iframe {
         height: 400px;
+        max-width: 100%;
     }
 }
 
