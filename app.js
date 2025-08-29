@@ -26,8 +26,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (track) {
         const images = [
             'img/carrusel/img18.png',
+            'img/carrusel/img20.webp',
             'img/carrusel/img16.png',
+            'img/carrusel/img22.webp',
             'img/carrusel/img17.png',
+            'img/carrusel/img26.webp',
             'img/carrusel/aaaa.png',
             'img/carrusel/img19.png'
         ];
