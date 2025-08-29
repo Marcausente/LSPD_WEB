@@ -1,5 +1,5 @@
 :root {
-    --primary-color: #00234a; /* Azul más oscuro */
+    --primary-color: #00113d; /* Azul más oscuro */
     --secondary-color: #f8f9fa;
     --accent-color: #dc3545;
     --text-light: #ffffff;
@@ -923,7 +923,7 @@ body {
 }
 
 .status-banner {
-    background: linear-gradient(45deg, var(--primary-color), #0056b3);
+    background: linear-gradient(45deg, var(--primary-color), #030e30);
     color: var(--white);
     padding: 1rem 2rem;
     border-radius: 8px;

@@ -25,13 +25,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = document.querySelector('.carousel-track');
     if (track) {
         const images = [
-            'img/carrusel/patch.png',
-            'img/carrusel/parracopter.png',
-            'img/carrusel/gala.png',
-            'img/carrusel/people.png',
+            'img/carrusel/img18.png',
+            'img/carrusel/img16.png',
+            'img/carrusel/img17.png',
             'img/carrusel/aaaa.png',
-            'img/carrusel/swat.png',
-            'img/carrusel/ship.png'
+            'img/carrusel/img19.png'
         ];
 
         let currentIndex = 0;
