@@ -46,16 +46,32 @@
         <div class="complaints-container">
             <div class="complaints-header">
                 <h2>Reportar un Incidente</h2>
-                <p>Si has sido testigo de un delito o necesitas reportar un incidente, utiliza nuestro formulario oficial de denuncias. Tu información será tratada con la máxima confidencialidad y será investigada por nuestros agentes especializados.</p>
+                <p>Si has sido testigo de un delito o necesitas reportar un incidente, selecciona el tipo de denuncia correspondiente. Tu información será tratada con la máxima confidencialidad y será investigada por nuestros agentes especializados.</p>
             </div>
             
             <div class="complaints-content">
-                <div class="complaints-form-section">
-                    <div class="form-container">
-                        <h3>Formulario de Denuncia</h3>
-                        <p>Haz clic en el botón para acceder al formulario oficial de denuncias del departamento</p>
-                        <a href="https://forms.google.com/example" target="_blank" class="complaint-button" id="complaintFormBtn">
-                            <span>Presentar Denuncia</span>
+                <!-- Denuncias hacia policías -->
+                <div class="complaint-type-section">
+                    <div class="complaint-type-card">
+                        <div class="complaint-type-icon">👮‍♂️</div>
+                        <h3>Denuncias hacia Policías</h3>
+                        <p>Reporta conductas inapropiadas o irregularidades por parte de oficiales del departamento. Estas denuncias son manejadas por la División de Asuntos Internos.</p>
+                        <a href="https://forms.google.com/internal-affairs" target="_blank" class="complaint-button internal-affairs">
+                            <span>Formulario de Asuntos Internos</span>
+                            <div class="button-arrow">→</div>
+                        </a>
+                        <p class="form-note">* El formulario se abrirá en una nueva ventana</p>
+                    </div>
+                </div>
+
+                <!-- Denuncias a civiles -->
+                <div class="complaint-type-section">
+                    <div class="complaint-type-card">
+                        <div class="complaint-type-icon">👥</div>
+                        <h3>Denuncias a Civiles</h3>
+                        <p>Reporta delitos o incidentes cometidos por civiles. Estas denuncias son investigadas por la Detective Bureau del departamento.</p>
+                        <a href="https://forms.google.com/detective-bureau" target="_blank" class="complaint-button detective-bureau">
+                            <span>Formulario de Detective Bureau</span>
                             <div class="button-arrow">→</div>
                         </a>
                         <p class="form-note">* El formulario se abrirá en una nueva ventana</p>
