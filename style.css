@@ -3523,3 +3523,115 @@ body {
         font-size: 0.9rem;
     }
 }
+
+/* Estilos para la página de la Constitución */
+.constitution-section {
+    padding: 4rem 2rem;
+    background-color: var(--white);
+    min-height: 600px;
+}
+
+.constitution-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.constitution-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+}
+
+.constitution-header h2 {
+    color: var(--dark-green);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    position: relative;
+    display: inline-block;
+}
+
+.constitution-header h2::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: var(--dark-green);
+    transition: width 0.4s ease;
+}
+
+.constitution-header:hover h2::after {
+    width: 80%;
+}
+
+.constitution-header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.constitution-iframe-container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.constitution-iframe-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.constitution-iframe {
+    width: 100%;
+    height: 700px;
+    border: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+    .constitution-section {
+        padding: 2rem 1rem;
+    }
+    
+    .constitution-header h2 {
+        font-size: 2rem;
+    }
+    
+    .constitution-header p {
+        font-size: 1.1rem;
+    }
+    
+    .constitution-iframe {
+        height: 500px;
+    }
+}
+
+@media (max-width: 480px) {
+    .constitution-header h2 {
+        font-size: 1.8rem;
+    }
+    
+    .constitution-header p {
+        font-size: 1rem;
+    }
+    
+    .constitution-iframe {
+        height: 400px;
+    }
+}
+
+/* Ajustes para pantallas muy pequeñas */
+@media (max-height: 600px) {
+    .constitution-iframe {
+        height: 350px;
+    }
+}
