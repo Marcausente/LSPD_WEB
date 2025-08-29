@@ -3972,3 +3972,95 @@ body {
         max-width: 500px;
     }
 }
+
+/* Layout de dos columnas para rangos */
+.ranks-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+.ranks-column {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Tema verdoso para la columna LSSD */
+.ranks-column.lssd .category-title,
+.ranks-column.lssd .rank-info h3 {
+    color: var(--sheriff-dark-green);
+}
+
+.ranks-column.lssd .rank-item {
+    box-shadow: 0 10px 30px rgba(26, 77, 46, 0.08), 0 0 0 1px rgba(26, 77, 46, 0.05);
+}
+
+.ranks-column.lssd .rank-info::before {
+    background: linear-gradient(to bottom, var(--sheriff-dark-green), var(--sheriff-light-green));
+}
+
+.ranks-column.lssd .rank-item:hover .rank-info h3::after,
+.ranks-column.lssd .rank-info h3::after {
+    background: var(--sheriff-dark-green);
+}
+
+/* Sutilezas en fondos de bloques LSSD */
+.ranks-column.lssd .branch-description {
+    color: #2e5640;
+}
+
+/* Responsividad columnas rangos */
+@media (max-width: 992px) {
+    .ranks-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Tema verdoso específico para bloque LSSD en rangos */
+.lssd-block .category-title,
+.lssd-block .rank-info h3 {
+    color: var(--sheriff-dark-green);
+}
+
+.lssd-block .rank-item {
+    box-shadow: 0 10px 30px rgba(26, 77, 46, 0.08), 0 0 0 1px rgba(26, 77, 46, 0.05);
+}
+
+.lssd-block .rank-info::before {
+    background: linear-gradient(to bottom, var(--sheriff-dark-green), var(--sheriff-light-green));
+}
+
+.lssd-block .branch-description {
+    color: #2e5640;
+}
+
+/* Ajuste específico: reducir altura del Sargento Mayor (SGT II) en LSSD */
+.lssd-block [data-rank="Sargento Mayor"] .rank-badge {
+    width: 180px;
+    min-width: 150px;
+    padding: 1rem;
+}
+
+.lssd-block [data-rank="Sargento Mayor"] .rank-badge img {
+    max-height: 110px;
+}
+
+.lssd-block [data-rank="Sargento Mayor"] .rank-info {
+    padding: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .lssd-block [data-rank="Sargento Mayor"] .rank-badge {
+        width: 140px;
+        min-width: 140px;
+        padding: 0.8rem;
+    }
+    .lssd-block [data-rank="Sargento Mayor"] .rank-badge img {
+        max-height: 100px;
+    }
+    .lssd-block [data-rank="Sargento Mayor"] .rank-info {
+        padding: 1.2rem;
+    }
+}
