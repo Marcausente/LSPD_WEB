@@ -3728,7 +3728,7 @@ body {
 
 /* Estilos para la página de Denuncias */
 .complaints-section {
-    padding: 1rem 2rem 4rem 2rem;
+    padding: 2rem 2rem 4rem 2rem;
     background-color: var(--white);
     min-height: 600px;
 }
@@ -3736,10 +3736,6 @@ body {
 .complaints-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 1.5rem;
-     width: 100%;
-     align-items: center;
-
 }
 
 .complaints-header {
@@ -3782,11 +3778,10 @@ body {
 
 .complaints-content {
     display: flex;
-    justify-content: center;
-    align-items: center;
     grid-template-columns: 1fr 1fr;
-     min-height: 350px;
-    margin: 2rem 0;
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 
@@ -3915,8 +3910,7 @@ body {
     text-align: center;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
     width: 100%;
-    padding: 3rem 4rem;
-    max-width: 950px;
+    max-width: 450px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
