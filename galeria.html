@@ -6,6 +6,59 @@
     <title>Galería - San Andreas Police Department</title>
     <link rel="icon" type="image/webp" href="img/LSSD.webp">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos específicos para el lightbox - inline para asegurar funcionamiento */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            cursor: pointer;
+        }
+        
+        .lightbox.show {
+            display: flex !important;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+        }
+        
+        .lightbox .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10000;
+        }
+        
+        .lightbox .close-btn:hover {
+            color: #FFD700;
+        }
+        
+        .gallery-item {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -24,13 +77,12 @@
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="acceso.html">Acceso LSPD</a></li>
                 <li><a href="accesolssd.html">Acceso LSSD</a></li>
-                <li><a href="galeria.html"class="active" >Galería</a></li>
+                <li><a href="galeria.html" class="active">Galería</a></li>
                 <li><a href="informacion.html">Información</a></li>
                 <li><a href="denuncias.html">Denuncias</a></li>
             </ul>
         </div>
     </nav>
-
 
     <!-- Banner -->
     <div class="page-banner">
@@ -46,47 +98,85 @@
     <!-- Galería -->
     <section class="gallery-section">
         <div class="gallery-container">
-            <!-- Contenedor del lightbox -->
-            <div class="lightbox" id="lightbox">
-                <span class="close-lightbox">&times;</span>
-                <img class="lightbox-content" id="lightbox-img">
-                <div class="lightbox-caption"></div>
-                
-                <!-- Navegación del lightbox -->
-                <button class="lightbox-nav prev" id="lightbox-prev">&lt;</button>
-                <button class="lightbox-nav next" id="lightbox-next">&gt;</button>
-                
-                <!-- Indicadores de navegación -->
-                <div class="lightbox-indicators" id="lightbox-indicators"></div>
-            </div>
-
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="img/galeria/img8.webp" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img21.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img23.webp" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img24.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img25.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img27.webp" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img28.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img29.webp" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img30.webp" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img31.webp" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img32.webp" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img33.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img34.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img35.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img36.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img37.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img38.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img39.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img40.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img41.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img42.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img43.png" alt="SAPD Gallery"></div>
-                <div class="gallery-item"><img src="img/galeria/img44.png" alt="SAPD Gallery"></div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img8.webp', 'SAPD Gallery')">
+                    <img src="img/galeria/img8.webp" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img21.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img21.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img23.webp', 'SAPD Gallery')">
+                    <img src="img/galeria/img23.webp" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img24.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img24.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img25.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img25.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img27.webp', 'SAPD Gallery')">
+                    <img src="img/galeria/img27.webp" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img28.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img28.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img29.webp', 'SAPD Gallery')">
+                    <img src="img/galeria/img29.webp" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img30.webp', 'SAPD Gallery')">
+                    <img src="img/galeria/img30.webp" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img31.webp', 'SAPD Gallery')">
+                    <img src="img/galeria/img31.webp" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img32.webp', 'SAPD Gallery')">
+                    <img src="img/galeria/img32.webp" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img33.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img33.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img34.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img34.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img35.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img35.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img36.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img36.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img37.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img37.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img38.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img38.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img39.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img39.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img40.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img40.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img41.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img41.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img42.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img42.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img43.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img43.png" alt="SAPD Gallery">
+                </div>
+                <div class="gallery-item" onclick="openLightbox('img/galeria/img44.png', 'SAPD Gallery')">
+                    <img src="img/galeria/img44.png" alt="SAPD Gallery">
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <button class="close-btn" onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="">
+    </div>
 
     <!-- Lema -->
     <section class="motto-section">
@@ -98,6 +188,40 @@
         <p>© 2025 Vice Community. Todos los derechos reservados.</p>
     </footer>
 
-    <script src="app.js"></script>
+    <script>
+        // Funciones del lightbox - JavaScript inline para asegurar funcionamiento
+        function openLightbox(src, alt) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            
+            lightboxImg.src = src;
+            lightboxImg.alt = alt;
+            
+            lightbox.classList.add('show');
+            document.body.style.overflow = 'hidden';
+            
+            console.log('Lightbox abierto:', src);
+        }
+        
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('show');
+            document.body.style.overflow = 'auto';
+            
+            console.log('Lightbox cerrado');
+        }
+        
+        // Cerrar con tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+        });
+        
+        // Verificar que las funciones estén disponibles
+        console.log('Funciones del lightbox cargadas');
+        console.log('openLightbox:', typeof openLightbox);
+        console.log('closeLightbox:', typeof closeLightbox);
+    </script>
 </body>
 </html>
