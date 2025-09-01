@@ -1541,7 +1541,8 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: all 0.5s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
 }
 
 .gallery-item::before {
@@ -1567,7 +1568,8 @@ body {
 }
 
 .gallery-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.08);
+    filter: brightness(1.1);
 }
 
 .gallery-item:hover::before {
@@ -1582,10 +1584,11 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     z-index: 1000;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(5px);
 }
 
 .lightbox.active {
@@ -1596,32 +1599,182 @@ body {
 }
 
 .lightbox-content {
-    max-width: 90%;
-    max-height: 90vh;
+    max-width: 95%;
+    max-height: 95vh;
     object-fit: contain;
-    border-radius: 4px;
-    box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    transform: scale(0.9);
-    transition: transform 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    transform: scale(0.8) translateY(20px);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    opacity: 0;
+    filter: blur(5px);
+}
+
+.lightbox-content.loaded {
+    opacity: 1;
+    filter: blur(0);
 }
 
 .lightbox.active .lightbox-content {
-    transform: scale(1);
+    transform: scale(1) translateY(0);
 }
 
 .close-lightbox {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 30px;
+    right: 30px;
     color: white;
-    font-size: 2rem;
+    font-size: 3rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.5);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .close-lightbox:hover {
-    transform: rotate(90deg);
+    transform: rotate(90deg) scale(1.1);
     color: #FFD700;
+    background: rgba(0, 0, 0, 0.8);
+    border-color: #FFD700;
+}
+
+.lightbox-caption {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.lightbox.active .lightbox-caption {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Navegación del lightbox */
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-nav:hover {
+    background: rgba(0, 0, 0, 0.8);
+    border-color: #FFD700;
+    color: #FFD700;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-nav.prev {
+    left: 30px;
+}
+
+.lightbox-nav.next {
+    right: 30px;
+}
+
+/* Indicadores de navegación */
+.lightbox-indicators {
+    position: absolute;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    z-index: 1001;
+}
+
+.lightbox-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.lightbox-indicator.active {
+    background: #FFD700;
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.2);
+}
+
+.lightbox-indicator:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+}
+
+/* Responsive para el lightbox */
+@media (max-width: 768px) {
+    .lightbox-content {
+        max-width: 98%;
+        max-height: 98vh;
+    }
+    
+    .close-lightbox {
+        top: 20px;
+        right: 20px;
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    
+    .lightbox-nav {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        padding: 0.8rem;
+    }
+    
+    .lightbox-nav.prev {
+        left: 20px;
+    }
+    
+    .lightbox-nav.next {
+        right: 20px;
+    }
+    
+    .lightbox-caption {
+        bottom: 20px;
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .lightbox-indicators {
+        bottom: 60px;
+    }
 }
 
 /* Media queries mejorados */
@@ -3318,7 +3471,7 @@ body {
 
 .division-header {
     padding: 1.5rem;
-    background: linear-gradient(to right, #2a5a3a, #3d7a4c);
+    background: linear-gradient(to right, var(--primary-color), var(--dark-green));
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -3331,6 +3484,19 @@ body {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 50%;
     padding: 5px;
+}
+
+/* Placeholder para logos que no existen */
+.division-logo-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-size: 1.5rem;
 }
 
 .division-header h2 {
@@ -3361,7 +3527,7 @@ body {
 
 .detail-label {
     font-weight: 600;
-    color: #2a5a3a;
+    color: var(--dark-green);
     width: 110px;
     flex-shrink: 0;
 }
@@ -3378,14 +3544,23 @@ body {
     font-weight: 500;
 }
 
-.division-type.joint {
-    background-color: rgba(65, 105, 225, 0.15);
-    color: royalblue;
+/* Colores según el tipo de división */
+.division-type.lspd {
+    background-color: rgba(0, 17, 61, 0.15);
+    color: var(--primary-color);
+    border: 1px solid rgba(0, 17, 61, 0.3);
 }
 
-.division-type.exclusive {
-    background-color: rgba(46, 139, 87, 0.15);
-    color: seagreen;
+.division-type.lssd {
+    background-color: rgba(26, 77, 46, 0.15);
+    color: var(--sheriff-dark-green);
+    border: 1px solid rgba(26, 77, 46, 0.3);
+}
+
+.division-type.joint {
+    background-color: rgba(64, 224, 208, 0.15);
+    color: #20b2aa;
+    border: 1px solid rgba(64, 224, 208, 0.3);
 }
 
 .division-description {
@@ -3413,7 +3588,8 @@ body {
         padding: 1rem;
     }
     
-    .division-logo {
+    .division-logo,
+    .division-logo-placeholder {
         width: 50px;
         height: 50px;
     }

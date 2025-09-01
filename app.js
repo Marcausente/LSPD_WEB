@@ -292,6 +292,65 @@ document.addEventListener('DOMContentLoaded', () => {
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeLightbox = document.querySelector('.close-lightbox');
+    const lightboxPrev = document.getElementById('lightbox-prev');
+    const lightboxNext = document.getElementById('lightbox-next');
+    const lightboxIndicators = document.getElementById('lightbox-indicators');
+    const lightboxCaption = document.querySelector('.lightbox-caption');
+
+    let currentImageIndex = 0;
+    const images = Array.from(galleryItems).map(item => item.querySelector('img'));
+
+    // Crear indicadores de navegación
+    function createIndicators() {
+        lightboxIndicators.innerHTML = '';
+        images.forEach((_, index) => {
+            const indicator = document.createElement('div');
+            indicator.className = 'lightbox-indicator';
+            indicator.addEventListener('click', () => {
+                showImage(index);
+            });
+            lightboxIndicators.appendChild(indicator);
+        });
+    }
+
+    // Mostrar imagen específica en el lightbox
+    function showImage(index) {
+        if (index < 0) index = images.length - 1;
+        if (index >= images.length) index = 0;
+        
+        currentImageIndex = index;
+        const img = images[index];
+        
+        // Resetear estado de la imagen
+        lightboxImg.classList.remove('loaded');
+        lightboxImg.style.transform = 'scale(0.8) translateY(20px)';
+        
+        // Cargar nueva imagen
+        lightboxImg.src = img.src;
+        lightboxCaption.textContent = img.alt || `Imagen ${index + 1} de ${images.length}`;
+        
+        // Actualizar indicadores activos
+        document.querySelectorAll('.lightbox-indicator').forEach((indicator, i) => {
+            indicator.classList.toggle('active', i === index);
+        });
+        
+        // Manejar carga de imagen
+        lightboxImg.onload = () => {
+            lightboxImg.classList.add('loaded');
+            setTimeout(() => {
+                lightboxImg.style.transform = 'scale(1) translateY(0)';
+            }, 100);
+        };
+    }
+
+    // Navegación del lightbox
+    function nextImage() {
+        showImage(currentImageIndex + 1);
+    }
+
+    function prevImage() {
+        showImage(currentImageIndex - 1);
+    }
 
     // Añadir delay de animación a cada item
     galleryItems.forEach((item, index) => {
@@ -299,12 +358,16 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Abrir lightbox
-    galleryItems.forEach(item => {
+    galleryItems.forEach((item, index) => {
         item.addEventListener('click', () => {
-            const img = item.querySelector('img');
-            lightboxImg.src = img.src;
+            showImage(index);
             lightbox.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Crear indicadores si no existen
+            if (lightboxIndicators.children.length === 0) {
+                createIndicators();
+            }
         });
     });
 
@@ -312,6 +375,9 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeLightboxFunction() {
         lightbox.classList.remove('active');
         document.body.style.overflow = 'auto';
+        
+        // Resetear transformación de la imagen
+        lightboxImg.style.transform = 'scale(0.8) translateY(20px)';
     }
 
     closeLightbox.addEventListener('click', closeLightboxFunction);
@@ -321,11 +387,66 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Cerrar con tecla ESC
+    // Navegación con botones
+    if (lightboxPrev && lightboxNext) {
+        lightboxPrev.addEventListener('click', prevImage);
+        lightboxNext.addEventListener('click', nextImage);
+    }
+
+    // Navegación con teclado
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-            closeLightboxFunction();
+        if (!lightbox.classList.contains('active')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closeLightboxFunction();
+                break;
+            case 'ArrowLeft':
+                prevImage();
+                break;
+            case 'ArrowRight':
+                nextImage();
+                break;
         }
+    });
+
+    // Navegación con gestos táctiles (swipe)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                nextImage(); // Swipe izquierda
+            } else {
+                prevImage(); // Swipe derecha
+            }
+        }
+    }
+
+    // Efecto de hover mejorado para las imágenes de la galería
+    galleryItems.forEach(item => {
+        const img = item.querySelector('img');
+        
+        item.addEventListener('mouseenter', () => {
+            img.style.transform = 'scale(1.05)';
+        });
+        
+        item.addEventListener('mouseleave', () => {
+            img.style.transform = 'scale(1)';
+        });
     });
 
     // Funcionalidad específica para la página de Rangers
